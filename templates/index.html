@@ -1,0 +1,55 @@
+{% extends 'flatpages/default.html'%}
+{% load custom_filters %}
+{% load custom_tags %}
+
+{% block title %}
+News
+{% endblock title %}
+
+
+
+
+{% block content%}
+<form action='' method='get'>
+    {{filterset.form.as_p}}
+    <input type="submit" value="search" />
+</form>
+
+<hr>
+
+{% if perms.news.add_news %}
+<a href="{%url 'news_create'%}">Add news</a>
+{% endif %}
+
+{% if perms.news.change_news or perms.news.delete_news %}
+<td>Action</td>
+{%endif%}
+
+{% for new in news %}
+<p>{{new.title|censor}}:{{new.datepost|date:'d M Y'}}</p>
+<p>{{new.text|truncate-chars:20|censor}}</p>
+<a href="{{ new.get_absolute_url }}">News url</a>
+
+{%if perms.news.change_news%}
+<a href = "{%url 'news_update' pk=news.id %}">Update news</a>
+{%endif%}
+
+{% endfor %}
+
+{% if page_obj.has_previous %}
+<a href="?{% url_replace page=1">1</a>
+{% if page_obj.previous_page_number != 1 %}
+...
+<a href="?{% url_replace page=page_obj.previous_page_number %}">{{page_obj.previous_page_number}}</a>
+{% endif %}
+{% endif %}
+
+{{page_obj.number}}
+{% if page_obj.has_next %}
+<a href="?{% url_replace page=page_obj.next_page_number %}">{{page_obj.previous_page_number}}</a>
+{% if paginator.num_pages !=page_obj.next_page_number %}
+...
+<a href="?{% url_replace page=page_obj.paginator.num_pages %}">{{page_obj.paginator.num_pages}}</a>
+{% endif %}
+{% endif %}
+{% endblock content%}
