@@ -3,7 +3,7 @@ from django.forms import DateTimeInput
 from .models import New
 
 class NewFilter(FilterSet):
-    added_after = DateTimeFilter(field_name='datepost',
+    added_after = DateTimeFilter(field_name='date_post',
                                lookup_expr='gt',
                                widget=DateTimeInput(format='%Y-%m-%dT%H:%M',
                                                     attrs={'type':'datetime-local'},

@@ -44,11 +44,11 @@ INSTALLED_APPS = [
     'django_filters',
     'django.contrib.sites',
     'django.contrib.flatpages',
-    'allauth'
+    'django_allauth',
     'allauth.account',
     'allauth.social_account',
     'allauth.social_account.providers.yandex',
-
+    'django_apscheduler',
 ]
 
 SITE_ID = 1
@@ -149,6 +149,22 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 
 ACCOUNT_FORMS = {'signup': 'accounts.forms.CustomSignupForm'}
+
+SERVER_EMAIL = 'example@yandex.ru'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'example@yandex.ru'
+EMAIL_HOST_PASSWORD = 'iliezvcovrxqizey'
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+
+DEFAULT_FORM_EMAIL = 'example@yandex.ru'
+
+
+
