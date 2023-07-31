@@ -8,7 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.contrib.auth.decorators import Login_required
 from django.db.models import Exists, OuterRef
 from django.views.decorators.csrf import csrf_protect
-from .models Subscription, Category
+from .models import Subscription, Category
 
 
 
